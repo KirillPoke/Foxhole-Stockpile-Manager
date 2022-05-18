@@ -1,14 +1,10 @@
 import cv2
 import pytesseract
 
-from image_finder import get_number_contours
+from image_finder import get_number_contours, get_storage_header
 
 pytesseract.pytesseract.tesseract_cmd = r'F:\\Coding\\tesseract.exe'
-import matplotlib.pyplot as plt
 import numpy as np
-from pytesseract import Output
-import os
-import pandas as pd
 
 
 def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
@@ -66,9 +62,6 @@ def validate_padding_found(string, padding_string):
         print("Did not found correct padding")
         #raise AssertionError("Did not found correct padding")
 
-def show_img(img):
-    cv2.imshow('graycsale image', img)
-    cv2.waitKey(0)
 
 def fancy_img_to_string(img):
     separator_digit = '39900993'
@@ -84,7 +77,7 @@ def fancy_img_to_string(img):
 
 if __name__ == '__main__':
     dir = 'unrecognized'
-    img = cv2.imread('C:\\Users\\Kirill\\Desktop\\stockpile.png')  # read image
+    img = cv2.imread('C:\\Users\\Kirill\\Desktop\\stockpile.png')
     contours = get_number_contours(img)
     for cnt in contours:
         string_from_image = fancy_img_to_string(cnt)
